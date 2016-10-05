@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    @import 'https://fonts.googleapis.com/css?family=Roboto';
+    body {
+      display: flex;
+      margin: 0;
+      height: 100vh;
+      font-family: 'Roboto', sans-serif;
+      overflow: hidden;
+    }
+    body aside {
+      flex: 1;
+      padding: 8px;
+    }
+    input {
+      display: block;
+      margin: 8px;
+    }
+    #timeContainer {
+      padding: 8px;
+    }
+    #planetContainer {
+      padding: 8px;
+    }
+    .planet {
+      display: flex;
+      flex-direction: row-reverse
+    }
+    .planetInfo {
+      flex: 1;
+    }
+    .planetName {
+      font-weight: bold;
+    }
+    body canvas {
+      width: 800px;
+      height: 800px;
+      box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 
+                  0 1px 18px 0 rgba(0, 0, 0, 0.12), 
+                  0 3px 5px -1px rgba(0, 0, 0, 0.4);
+      margin: 0 8px;
+      align-self: center;
+      cursor: crosshair;
+    }
+    button {
+      display: flex;
+      box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 
+                  0 1px 8px 0 rgba(0, 0, 0, 0.12), 
+                  0 3px 3px -2px rgba(0, 0, 0, 0.4);
+      background: white;
+      border: none;
+      color: #616161;
+      cursor: pointer;
+      border-radius: 4px;
+      padding: 8px;
+      font-size: 18px;
+      text-transform: uppercase;
+    }
+    .coords {
+      position: absolute;
+      display: block;
+      background: #616161;
+      color: #fff;
+      padding: 8px;
+      will-change: transform;
+      transform: translate(245px, 5px);
+      cursor: crosshair;
+    }
+    .coords.topLeft {
+      border-radius: 0 8px 8px 8px;
+    }
+    .coords.topRight {
+      border-radius: 8px 0 8px 8px;
+    }
+    .coords.bottomLeft {
+      border-radius: 8px 8px 0 8px;
+    }
+    .coords.bottomRight {
+      border-radius: 8px 8px 8px 0;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <aside>
+    <button id="playPauseButton" onclick="setRunning(!running)">Pause</button>
+    <div id="timeContainer"></div>
+    <label>
+      Planet name
+      <input id="planetName" type="Text">
+    </label>
+    <label>
+      x-Coord (in Mio. km)
+      <input id="xCoord" type="Number">
+    </label>
+    <label>
+      y-Coord (in Mio. km)
+      <input id="yCoord" type="Number">
+    </label>
+    <label>
+      x-Speed (in km/s)
+      <input id="xSpeed" type="Number">
+    </label>
+    <label>
+      y-Cooord (in km/s)
+      <input id="ySpeed" type="Number">
+    </label>
+    <button id="addPlanet" onclick="addPlanet()">Add</button>
+    <div id="planetContainer">
+    </div>
+  </aside>
+  <section id="mouseCoords" class="coords hidden"></section>
+<script src="lib/p5.min.js"></script>
+<script src="const.js"></script>
+<script src="planet.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
+
