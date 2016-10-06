@@ -101,14 +101,16 @@ function addPlanetByAphel(name, a, aphel) {
 }
 
 function setRunning(r) {
-	playPauseButton.innerText = running ? 'Play' : 'Pause';
+	playPauseButton.innerHTML =
+		running ? '<i class="material-icons">play_arrow</i>' : '<i class="material-icons">pause</i>';
 
 	running = r;
 }
 
 function setRecording(r) {
 	recording = r;
-	recordPauseButton.innerText = recording ? 'Stop' : 'Record';
+	recordPauseButton.innerHTML =
+		recording ? '<i class="material-icons">stop</i>' : '<i class="material-icons">show_chart</i>';
 	if (recording) {
 		var chartType = chartTypeInput.value;
 		var chartPlanetOption = chartPlanetInput.selectedOptions[0];

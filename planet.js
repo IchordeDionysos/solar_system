@@ -11,6 +11,8 @@ function Planet(name, x, y, vx, vy) {
 
 		this.deleteButton = document.createElement('button');
 		this.deleteButton.classList.add('deleteButton');
+		this.deleteButton.classList.add('colored');
+		this.deleteButton.classList.add('red');
 		this.deleteButton.innerHTML = '<i class="material-icons">delete_forever</i>';
 		this.deleteButton.onclick = this.delete.bind(this);
 		this.planetContainer.appendChild(this.deleteButton);

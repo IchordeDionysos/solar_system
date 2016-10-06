@@ -59,6 +59,21 @@
       font-size: 18px;
       text-transform: uppercase;
     }
+    .colored {
+      color: #fff;
+    }
+    .red {
+      background-color: #F44336;
+    }
+    .blue {
+      background-color: #2196F3;
+    }
+    .light_green {
+      background-color: #4CAF50;
+    }
+    .amber {
+      background-color: #FFC107;
+    }
     #chartOverlay {
       position: absolute;
       display: flex;
@@ -119,7 +134,7 @@
 </head>
 <body>
   <aside>
-    <button id="playPauseButton" onclick="setRunning(!running)">Pause</button>
+    <button id="playPauseButton" class="colored amber" onclick="setRunning(!running)">Pause</button>
     <div id="timeContainer"></div>
     <select id="chartType">
       <option value="s-t">s-t-Diagramm</option>
@@ -128,7 +143,7 @@
     </select>
     <select id="chartPlanet">
     </select>
-    <button id="recordPauseButton" style="margin-bottom: 8px;" onclick="setRecording(!recording)">Record</button>
+    <button id="recordPauseButton" class="colored red" style="margin-bottom: 8px;" onclick="setRecording(!recording)">Record</button>
     <label>
       Planet name
       <input id="planetName" type="Text">
@@ -149,7 +164,7 @@
       y-Cooord (in km/s)
       <input id="ySpeed" type="Number">
     </label>
-    <button id="addPlanet" onclick="addPlanet()">Add</button>
+    <button id="addPlanet" class="colored light_green" onclick="addPlanet()"><i class="material-icons">add</i></button>
     <div id="planetContainer">
     </div>
   </aside>
@@ -157,8 +172,8 @@
   <section id="chartOverlay" class="hidden">
     <canvas id="chartCanvas"></canvas>
     <div class="chartButtons">
-      <button onclick="closeChartOverlay()"><i class="material-icons">close</i></button>
-      <button onclick="printChart()">Print</button>
+      <button class="colored red" onclick="closeChartOverlay()"><i class="material-icons">close</i></button>
+      <button class="colored blue" onclick="printChart()"><i class="material-icons">print</i></button>
     </div>
   </section>
   <script src="lib/p5.min.js"></script>
