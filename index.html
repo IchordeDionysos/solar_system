@@ -15,7 +15,7 @@
       flex: 1;
       padding: 8px;
     }
-    input {
+    input, select {
       display: block;
       margin: 8px;
     }
@@ -35,7 +35,7 @@
     .planetName {
       font-weight: bold;
     }
-    body canvas {
+    body > canvas {
       width: 800px;
       height: 800px;
       box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 
@@ -58,6 +58,37 @@
       padding: 8px;
       font-size: 18px;
       text-transform: uppercase;
+    }
+    #chartOverlay {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: #fff;
+      box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 
+                  0 1px 18px 0 rgba(0, 0, 0, 0.12), 
+                  0 3px 5px -1px rgba(0, 0, 0, 0.4);
+    }
+    #chartOverlay.hidden {
+      display: none;
+    }
+    #chartCanvas {
+      flex: 1;
+    }
+    .planet {
+      margin: 8px 0;
+    }
+    .chartButtons {
+      display: flex;
+      padding: 8px;
+    }
+    .chartButtons button {
+      display: inline-block;
+      flex: 1;
+      margin: 0 8px;
     }
     .coords {
       position: absolute;
@@ -90,6 +121,14 @@
   <aside>
     <button id="playPauseButton" onclick="setRunning(!running)">Pause</button>
     <div id="timeContainer"></div>
+    <select id="chartType">
+      <option value="s-t">s-t-Diagramm</option>
+      <option value="v-t">v-t-Diagramm</option>
+      <option value="a-t">a-t-Diagramm</option>
+    </select>
+    <select id="chartPlanet">
+    </select>
+    <button id="recordPauseButton" style="margin-bottom: 8px;" onclick="setRecording(!recording)">Record</button>
     <label>
       Planet name
       <input id="planetName" type="Text">
@@ -115,10 +154,18 @@
     </div>
   </aside>
   <section id="mouseCoords" class="coords hidden"></section>
-<script src="lib/p5.min.js"></script>
-<script src="const.js"></script>
-<script src="planet.js"></script>
-<script src="index.js"></script>
+  <section id="chartOverlay" class="hidden">
+    <canvas id="chartCanvas"></canvas>
+    <div class="chartButtons">
+      <button onclick="closeChartOverlay()"><i class="material-icons">close</i></button>
+      <button>Print</button>
+    </div>
+  </section>
+  <script src="lib/p5.min.js"></script>
+  <script src="bower_components/chart.js/dist/Chart.js"></script>
+  <script src="const.js"></script>
+  <script src="planet.js"></script>
+  <script src="index.js"></script>
 </body>
 </html>
 

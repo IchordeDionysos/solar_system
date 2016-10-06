@@ -1,5 +1,6 @@
-var planets, running, time, playPauseButton, timeContainer, planetNameInput, xCoordInput, 
-	yCoordInput, xSpeedInput, ySpeedInput, planetContainer, mouseCoords;
+var planets, running, recording, time, playPauseButton, timeContainer, planetNameInput, xCoordInput, 
+	yCoordInput, xSpeedInput, ySpeedInput, planetContainer, mouseCoords, recordPauseButton, 
+	chartOverlay, chartTypeInput, chartPlanetInput, recordingPlanet;
 
 // The statements in the setup() function
 // execute once when the program begins
@@ -12,14 +13,18 @@ function setup() {
 	xSpeedInput = document.querySelector('#xSpeed');
 	ySpeedInput = document.querySelector('#ySpeed');
 	planetContainer = document.querySelector('#planetContainer');
-	mouseCoords = document.querySelector('#mouseCoords');
+	mouseCoords = document.querySelector('#mouseCoords');	
+	recordPauseButton = document.querySelector('#recordPauseButton');
+	chartOverlay = document.querySelector('#chartOverlay');
+	chartTypeInput = document.querySelector('#chartType');
+	chartPlanetInput = document.querySelector('#chartPlanet');
 
 	createCanvas(DIMEN, DIMEN);  // Size must be the first statement
 	frameRate(FRAMES);
 	planets = [];
 	addPlanetByAphel('Erde', A, APHEL);
-	// planets.push(new Planet(A, APHEL));
 	time = 0;
+	setRecording(false);
 	setRunning(true);
 }
 // The statements in draw() are executed until the
@@ -98,4 +103,43 @@ function setRunning(r) {
 	playPauseButton.innerText = running ? 'Play' : 'Pause';
 
 	running = r;
+}
+
+function setRecording(r) {
+	recording = r;
+	recordPauseButton.innerText = recording ? 'Stop' : 'Record';
+	if (recording) {
+		var chartType = chartTypeInput.value;
+		var chartPlanetOption = chartPlanetInput.selectedOptions[0];
+		// Find planet to track
+		for (var i=0; i<planets.length; i++) {
+			if (planets[i].chartPlanetOption === chartPlanetOption) {
+				recordingPlanet = planets[i];
+				recordingPlanet.record(chartType);
+			}
+		}
+	} else if(recordingPlanet) {
+		var recordType = recordingPlanet.recordType;
+		var recordData = recordingPlanet.stopRecording();
+		var ctx = document.getElementById("chartCanvas");
+		var labels = [];
+		for (var i=0; i<recordData.length; i++) {
+			labels.push(recordData[i].x + 'd');
+		}
+		var myChart = new Chart(ctx, {
+		    type: 'line',
+		    data: {
+		    	labels: labels,
+		        datasets: [{
+		            label: recordType + ' Diagramm',
+		            data: recordData
+		        }]
+		    }
+		});
+		chartOverlay.classList.remove('hidden');
+	}
+}
+
+function closeChartOverlay() {
+	chartOverlay.classList.add('hidden');
 }
