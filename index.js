@@ -1,6 +1,6 @@
 var planets, running, recording, time, playPauseButton, timeContainer, planetNameInput, xCoordInput, 
 	yCoordInput, xSpeedInput, ySpeedInput, planetContainer, mouseCoords, recordPauseButton, 
-	chartOverlay, chartTypeInput, chartPlanetInput, recordingPlanet;
+	chartOverlay, chartCanvas, chartTypeInput, chartPlanetInput, recordingPlanet;
 
 // The statements in the setup() function
 // execute once when the program begins
@@ -16,6 +16,7 @@ function setup() {
 	mouseCoords = document.querySelector('#mouseCoords');	
 	recordPauseButton = document.querySelector('#recordPauseButton');
 	chartOverlay = document.querySelector('#chartOverlay');
+	chartCanvas = document.getElementById("chartCanvas");
 	chartTypeInput = document.querySelector('#chartType');
 	chartPlanetInput = document.querySelector('#chartPlanet');
 
@@ -121,12 +122,11 @@ function setRecording(r) {
 	} else if(recordingPlanet) {
 		var recordType = recordingPlanet.recordType;
 		var recordData = recordingPlanet.stopRecording();
-		var ctx = document.getElementById("chartCanvas");
 		var labels = [];
 		for (var i=0; i<recordData.length; i++) {
 			labels.push(recordData[i].x + 'd');
 		}
-		var myChart = new Chart(ctx, {
+		var myChart = new Chart(chartCanvas, {
 		    type: 'line',
 		    data: {
 		    	labels: labels,
@@ -138,6 +138,24 @@ function setRecording(r) {
 		});
 		chartOverlay.classList.remove('hidden');
 	}
+}
+
+function printChart() {
+	var dataUrl = chartCanvas.toDataURL(); //attempt to save base64 string to server using this var
+	var windowContent = '<!DOCTYPE html>';
+	windowContent += '<html>';
+	windowContent += '<head><title>Print chart</title></head>';
+	windowContent += '<body>';
+	windowContent += '<img src="' + dataUrl + '">';
+	windowContent += '</body>';
+	windowContent += '</html>';
+	var printWin = window.open('','','width=1040,height=900');
+	printWin.document.open();
+	printWin.document.write(windowContent);
+	printWin.document.close();
+	printWin.focus();
+	printWin.print();
+	printWin.close();
 }
 
 function closeChartOverlay() {
