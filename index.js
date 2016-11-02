@@ -1,11 +1,13 @@
-var planets, running, recording, time, playPauseButton, timeContainer, planetNameInput, xCoordInput, 
-	yCoordInput, xSpeedInput, ySpeedInput, planetContainer, mouseCoords, recordPauseButton, 
+var planets, running, recording, time, playPauseButton, zoomLevelInput, planetSpeedInput, timeContainer,
+  planetNameInput, xCoordInput, yCoordInput, xSpeedInput, ySpeedInput, planetContainer, mouseCoords, recordPauseButton,
 	chartOverlay, chartCanvas, chartTypeInput, chartPlanetInput, recordingPlanet;
 
 // The statements in the setup() function
 // execute once when the program begins
 function setup() {
 	playPauseButton = document.querySelector('#playPauseButton');
+  zoomLevelInput = document.querySelector('#zoomLevel');
+  planetSpeedInput = document.querySelector('#planetSpeed');
 	timeContainer = document.querySelector('#timeContainer');
 	planetNameInput = document.querySelector('#planetName');
 	xCoordInput = document.querySelector('#xCoord');
@@ -23,7 +25,6 @@ function setup() {
 	createCanvas(DIMEN, DIMEN);  // Size must be the first statement
 	frameRate(FRAMES);
 	planets = [];
-	addPlanetByAphel('Erde', A, APHEL);
 	time = 0;
 	setRecording(false);
 	setRunning(true);
@@ -33,19 +34,24 @@ function setup() {
 // sequence and after the last line is read, the first
 // line is executed again.
 function draw() {
+  var zoom = zoomLevelInput.value / 100;
+  var planetSpeed = planetSpeedInput.value * 1;
+
+  var t = TIME_PER_FRAME * planetSpeed;
+
 	if (running) {
 		background(255, 255, 255);   // Set the background to black
 		// Draw all planets
-		for (var i=0; i<planets.length; i++) {
-			planets[i].tick(TIME_PER_FRAME);
+		for (var c=0; c<planets.length; c++) {
+			planets[c].tick(t);
 		}
 		fill(249, 216, 44);
 		stroke(249, 216, 44);
 		ellipse(ORIGIN, ORIGIN, 10, 10);
-		for (var i=0; i<planets.length; i++) {
-			planets[i].draw();
+		for (var d=0; d<planets.length; d++) {
+			planets[d].draw(zoom);
 		}
-		time += TIME_PER_FRAME;
+		time += t;
 		timeContainer.innerText = Math.round(time / MONTH) + '. Monat';
 		// Update location display
 		// Check if mouse is in canvas
@@ -53,8 +59,8 @@ function draw() {
 			var xOrientation = mouseX < 400 ? -1 : 1;
 			var yOrientation = mouseY < 400 ? -1 : 1;
 			mouseCoords.classList.remove('hidden');
-			var x = Math.round((-1 * (ORIGIN - mouseX)) / (NORMALISE_DISTANCES * 1e9));
-			var y = Math.round((ORIGIN - mouseY) / (NORMALISE_DISTANCES * 1e9));
+			var x = Math.round((-1 * (ORIGIN - mouseX)) / (NORMALISE_DISTANCES * 1e9 * zoom ));
+			var y = Math.round((ORIGIN - mouseY) / (NORMALISE_DISTANCES * 1e9 * zoom ));
 			mouseCoords.innerText = "x: " + x + " Mio. km / y: " + y + " Mio. km";
 			var transX = xOrientation > 0 ? "calc(" + winMouseX + "px - 100%)" : winMouseX + "px";
 			var transY = yOrientation > 0 ? "calc(" + winMouseY + "px - 100%)" : winMouseY + "px";
@@ -107,17 +113,17 @@ function setRunning(r) {
 	running = r;
 }
 
-function setRecording(r) {
-	recording = r;
+function setRecording(rec) {
+	recording = rec;
 	recordPauseButton.innerHTML =
 		recording ? '<i class="material-icons">stop</i>' : '<i class="material-icons">show_chart</i>';
 	if (recording) {
 		var chartType = chartTypeInput.value;
 		var chartPlanetOption = chartPlanetInput.selectedOptions[0];
 		// Find planet to track
-		for (var i=0; i<planets.length; i++) {
-			if (planets[i].chartPlanetOption === chartPlanetOption) {
-				recordingPlanet = planets[i];
+		for (var r=0; r<planets.length; r++) {
+			if (planets[r].chartPlanetOption === chartPlanetOption) {
+				recordingPlanet = planets[r];
 				recordingPlanet.record(chartType);
 			}
 		}
@@ -128,7 +134,7 @@ function setRecording(r) {
 		for (var i=0; i<recordData.length; i++) {
 			labels.push(recordData[i].x + 'd');
 		}
-		var myChart = new Chart(chartCanvas, {
+		new Chart(chartCanvas, {
 		    type: 'line',
 		    data: {
 		    	labels: labels,

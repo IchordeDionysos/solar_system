@@ -1,7 +1,7 @@
 function Planet(name, x, y, vx, vy) {
 
 	this.init = function() {
-		// Setup sidenav item
+		// Setup side nav item
 		this.id = name;
 		this.name = name;
 
@@ -45,7 +45,7 @@ function Planet(name, x, y, vx, vy) {
 
 		this.points = [];
 		
-		this.recordType;
+		this.recordType = null;
 		this.recordTime = 0;
 		this.recordData = [];
 	};
@@ -89,16 +89,18 @@ function Planet(name, x, y, vx, vy) {
 		return this.recordData;
 	};
 
-	this.draw = function () {
+	this.draw = function (zoom) {
 		this.earth++;
 		fill(150, 150, 150);
 		stroke(150, 150, 150);
 		for (var i = 0; i < this.points.length; i++) {
-			ellipse(this.points[i].x * NORMALISE_DISTANCES + ORIGIN, this.points[i].y * NORMALISE_DISTANCES + ORIGIN, 2, 2);
+			ellipse(this.points[i].x * NORMALISE_DISTANCES * zoom + ORIGIN,
+				this.points[i].y * NORMALISE_DISTANCES * zoom + ORIGIN, 2, 2);
 		}
 		fill(0, 0, 200);
 		stroke(0, 0, 200);
-		ellipse(this.px * NORMALISE_DISTANCES + ORIGIN, this.py * NORMALISE_DISTANCES + ORIGIN, 5, 5);
+		ellipse(this.px * NORMALISE_DISTANCES * zoom  + ORIGIN,
+			this.py * NORMALISE_DISTANCES * zoom + ORIGIN, 5, 5);
 	};
 
 	this.delete = function() {

@@ -14,16 +14,17 @@
     body aside {
       flex: 1;
       padding: 8px;
+      overflow-y: auto;
     }
     input, select {
       display: block;
       margin: 8px;
-	  border: none;
-	  border-bottom: 2px solid #7f7f7f;
-	  outline: none;
+      border: none;
+      border-bottom: 2px solid #7f7f7f;
+      outline: none;
     }
-	input:focus, select:focus {
-	  border-bottom-color: #f44336;
+    input:focus, select:focus {
+      border-bottom-color: #f44336;
     }
     #timeContainer {
       padding: 8px;
@@ -141,6 +142,14 @@
 <body>
   <aside>
     <button id="playPauseButton" class="colored amber" onclick="setRunning(!running)">Pause</button>
+    <label>
+      Zoom level
+      <input id="zoomLevel" type="Number" value="100" min="100" max="500" step="5">
+    </label>
+    <label>
+      Planet speed
+      <input id="planetSpeed" type="Number" value="1" min="0.5" max="3" step="0.25">
+    </label>
     <div id="timeContainer"></div>
     <select id="chartType">
       <option value="s-t">s-t-Diagramm</option>
