@@ -22,7 +22,7 @@ function setup() {
 	chartTypeInput = document.querySelector('#chartType');
 	chartPlanetInput = document.querySelector('#chartPlanet');
 
-	createCanvas(DIMEN, DIMEN);  // Size must be the first statement
+	createCanvas(DIMENSION, DIMENSION);  // Size must be the first statement
 	frameRate(FRAMES);
 	planets = [];
 	time = 0;
@@ -55,7 +55,7 @@ function draw() {
 		timeContainer.innerText = Math.round(time / MONTH) + '. Monat';
 		// Update location display
 		// Check if mouse is in canvas
-		if (mouseX >= 0 && mouseX <= DIMEN && mouseY >= 0 && mouseY <= DIMEN) {
+		if (mouseX >= 0 && mouseX <= DIMENSION && mouseY >= 0 && mouseY <= DIMENSION) {
 			var xOrientation = mouseX < 400 ? -1 : 1;
 			var yOrientation = mouseY < 400 ? -1 : 1;
 			mouseCoords.classList.remove('hidden');
@@ -91,11 +91,13 @@ function draw() {
 
 function addPlanet() {
 	var name = planetNameInput.value;
-	var x = Number.parseFloat(xCoordInput.value) * 1e9;
-	var y = Number.parseFloat(yCoordInput.value) * 1e9;
-	var vx = Number.parseFloat(xSpeedInput.value) * 1e3;
-	var vy = Number.parseFloat(ySpeedInput.value) * 1e3;
-	planets.push(new Planet(name, x, y, vx, vy));
+	if (!addPlanetByName(name)) {
+		var x = Number.parseFloat(xCoordInput.value) * 1e9;
+		var y = Number.parseFloat(yCoordInput.value) * 1e9;
+		var vx = Number.parseFloat(xSpeedInput.value) * 1e3;
+		var vy = Number.parseFloat(ySpeedInput.value) * 1e3;
+		planets.push(new Planet(name, x, y, vx, vy));
+	}
 }
 
 function addPlanetByAphel(name, a, aphel) {
@@ -104,6 +106,56 @@ function addPlanetByAphel(name, a, aphel) {
 	var vx = 0;
 	var vy = Math.sqrt(G * SUN.m * (2/aphel - 1/a));
 	planets.push(new Planet(name, x, y, vx, vy));
+}
+
+function addPlanetByName(name) {
+	var lower_name = name.toLowerCase();
+	var isSolarSystem = lower_name === SOLAR_SYSTEM;
+  var nameSaved = false;
+
+	//noinspection FallThroughInSwitchStatementJS
+  switch (lower_name) {
+    case SOLAR_SYSTEM:
+      nameSaved = true;
+		case MERCURY:
+      nameSaved = true;
+      addPlanetByAphel(capitalize(MERCURY), A_MERCURY, APHEL_MERCURY);
+			if (!isSolarSystem) break;
+		case VENUS:
+      nameSaved = true;
+      addPlanetByAphel(capitalize(VENUS), A_VENUS, APHEL_VENUS);
+			if (!isSolarSystem) break;
+		case EARTH:
+      nameSaved = true;
+      addPlanetByAphel(capitalize(EARTH), A_EARTH, APHEL_EARTH);
+			if (!isSolarSystem) break;
+		case MARS:
+      nameSaved = true;
+      addPlanetByAphel(capitalize(MARS), A_MARS, APHEL_MARS);
+			if (!isSolarSystem) break;
+		case JUPITER:
+      nameSaved = true;
+      addPlanetByAphel(capitalize(JUPITER), A_JUPITER, APHEL_JUPITER);
+			if (!isSolarSystem) break;
+		case SATURN:
+      nameSaved = true;
+      addPlanetByAphel(capitalize(SATURN), A_SATURN, APHEL_SATURN);
+			if (!isSolarSystem) break;
+		case URANUS:
+      nameSaved = true;
+      addPlanetByAphel(capitalize(URANUS), A_URANUS, APHEL_URANUS);
+			if (!isSolarSystem) break;
+		case NEPTUNE:
+      nameSaved = true;
+      addPlanetByAphel(capitalize(NEPTUNE), A_NEPTUNE, APHEL_NEPTUNE);
+			if (!isSolarSystem) break;
+		case PLUTO:
+      nameSaved = true;
+      addPlanetByAphel(capitalize(PLUTO), A_PLUTO, APHEL_PLUTO);
+			if (!isSolarSystem) break;
+			if (!isSolarSystem) break;
+	}
+  return nameSaved;
 }
 
 function setRunning(r) {
@@ -168,4 +220,8 @@ function printChart() {
 
 function closeChartOverlay() {
 	chartOverlay.classList.add('hidden');
+}
+
+function capitalize(name) {
+  return name.charAt(0).toUpperCase() + name.slice(1);
 }
