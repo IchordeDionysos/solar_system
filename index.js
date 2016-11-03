@@ -1,6 +1,32 @@
 var planets, running, recording, time, playPauseButton, zoomLevelInput, planetSpeedInput, timeContainer,
   planetNameInput, xCoordInput, yCoordInput, xSpeedInput, ySpeedInput, planetContainer, mouseCoords, recordPauseButton,
-	chartOverlay, chartCanvas, chartTypeInput, chartPlanetInput, recordingPlanet;
+	chartOverlay, chartCanvas, chartTypeInput, chartPlanetInput, recordingPlanet,
+	sunImg, mercuryImg, venusImg, earthImg, marsImg, jupiterImg, saturnImg, uranusImg, neptuneImg, plutoImg;
+
+function preload() {
+	/* Bilderquellen
+	 http://bestanimations.com/Earth&Space/Sun/space-sun-solar-flare-animation-8.gif
+	 https://astrokramkiste.de/images/planeten/merkurglobus.jpg
+	 https://upload.wikimedia.org/wikipedia/commons/8/85/Venus_globe.jpg
+	 http://bjstlh.com/data/wallpapers/21/WDF_690860.jpg
+	 http://media.salon.com/2015/09/mars-614x412.jpg
+	 https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Hubble_Captures_Vivid_Auroras_in_Jupiter's_Atmosphere.jpg/220px-Hubble_Captures_Vivid_Auroras_in_Jupiter's_Atmosphere.jpg
+	 http://nssdc.gsfc.nasa.gov/planetary/image/saturn.jpg
+	 http://www.universetoday.com/wp-content/uploads/2010/06/Hubbles-Uranus-580x450.jpg
+	 https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg
+	 https://upload.wikimedia.org/wikipedia/commons/a/a7/Pluto-01_Stern_03_Pluto_Color_TXT.jpg
+	 */
+	sunImg = loadGif('images/sun.gif');
+	mercuryImg = loadImage('images/mercury.jpg');
+	venusImg = loadImage('images/venus.jpg');
+	earthImg = loadImage('images/earth.jpg');
+	marsImg = loadImage('images/mars.jpg');
+	jupiterImg = loadImage('images/jupiter.jpg');
+	saturnImg = loadImage('images/saturn.jpg');
+	uranusImg = loadImage('images/uranus.jpg');
+	neptuneImg = loadImage('images/neptune.jpg');
+	plutoImg = loadImage('images/pluto.jpg');
+}
 
 // The statements in the setup() function
 // execute once when the program begins
@@ -40,14 +66,15 @@ function draw() {
   var t = TIME_PER_FRAME * planetSpeed;
 
 	if (running) {
-		background(255, 255, 255);   // Set the background to black
+		background(0, 0, 0);   // Set the background to black
 		// Draw all planets
 		for (var c=0; c<planets.length; c++) {
 			planets[c].tick(t);
 		}
-		fill(249, 216, 44);
-		stroke(249, 216, 44);
-		ellipse(ORIGIN, ORIGIN, 10, 10);
+		// fill(249, 216, 44);
+		// stroke(249, 216, 44);
+		// ellipse(ORIGIN, ORIGIN, 10, 10);
+		image(sunImg, ORIGIN - 10, ORIGIN - 10, 20, 20);
 		for (var d=0; d<planets.length; d++) {
 			planets[d].draw(zoom);
 		}
