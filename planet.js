@@ -100,32 +100,32 @@ function Planet(name, x, y, vx, vy) {
 		fill(0, 0, 200);
 		stroke(0, 0, 200);
 		if (this.name.toLowerCase() === MERCURY) {
-			image(mercuryImg, this.px * NORMALISE_DISTANCES * zoom  + ORIGIN - 5,
-				this.py * NORMALISE_DISTANCES * zoom + ORIGIN - 5, 10, 10);
+			image(mercuryImg, this.px * NORMALISE_DISTANCES * zoom  + ORIGIN - 10,
+				this.py * NORMALISE_DISTANCES * zoom + ORIGIN - 10, 20, 20);
 		} else if (this.name.toLowerCase() === VENUS) {
-			image(venusImg, this.px * NORMALISE_DISTANCES * zoom  + ORIGIN - 5,
-				this.py * NORMALISE_DISTANCES * zoom + ORIGIN - 5, 10, 10);
+			image(venusImg, this.px * NORMALISE_DISTANCES * zoom  + ORIGIN - 10,
+				this.py * NORMALISE_DISTANCES * zoom + ORIGIN - 10, 20, 20);
 		} else if (this.name.toLowerCase() === EARTH) {
-			image(earthImg, this.px * NORMALISE_DISTANCES * zoom  + ORIGIN - 5,
-				this.py * NORMALISE_DISTANCES * zoom + ORIGIN - 5, 10, 10);
+			image(earthImg, this.px * NORMALISE_DISTANCES * zoom  + ORIGIN - 10,
+				this.py * NORMALISE_DISTANCES * zoom + ORIGIN - 10, 20, 20);
 		} else if (this.name.toLowerCase() === MARS) {
-			image(marsImg, this.px * NORMALISE_DISTANCES * zoom  + ORIGIN - 5,
-				this.py * NORMALISE_DISTANCES * zoom + ORIGIN - 5, 10, 10);
+			image(marsImg, this.px * NORMALISE_DISTANCES * zoom  + ORIGIN - 10,
+				this.py * NORMALISE_DISTANCES * zoom + ORIGIN - 10, 20, 20);
 		} else if (this.name.toLowerCase() === JUPITER) {
-			image(jupiterImg, this.px * NORMALISE_DISTANCES * zoom  + ORIGIN - 5,
-				this.py * NORMALISE_DISTANCES * zoom + ORIGIN - 5, 10, 10);
+			image(jupiterImg, this.px * NORMALISE_DISTANCES * zoom  + ORIGIN - 10,
+				this.py * NORMALISE_DISTANCES * zoom + ORIGIN - 10, 20, 20);
 		} else if (this.name.toLowerCase() === SATURN) {
-			image(saturnImg, this.px * NORMALISE_DISTANCES * zoom  + ORIGIN - 5,
-				this.py * NORMALISE_DISTANCES * zoom + ORIGIN - 5, 10, 10);
+			image(saturnImg, this.px * NORMALISE_DISTANCES * zoom  + ORIGIN - 10,
+				this.py * NORMALISE_DISTANCES * zoom + ORIGIN - 10, 20, 20);
 		} else if (this.name.toLowerCase() === URANUS) {
-			image(uranusImg, this.px * NORMALISE_DISTANCES * zoom  + ORIGIN - 5,
-				this.py * NORMALISE_DISTANCES * zoom + ORIGIN - 5, 10, 10);
+			image(uranusImg, this.px * NORMALISE_DISTANCES * zoom  + ORIGIN - 10,
+				this.py * NORMALISE_DISTANCES * zoom + ORIGIN - 10, 20, 20);
 		} else if (this.name.toLowerCase() === NEPTUNE) {
-			image(neptuneImg, this.px * NORMALISE_DISTANCES * zoom  + ORIGIN - 5,
-				this.py * NORMALISE_DISTANCES * zoom + ORIGIN - 5, 10, 10);
+			image(neptuneImg, this.px * NORMALISE_DISTANCES * zoom  + ORIGIN - 10,
+				this.py * NORMALISE_DISTANCES * zoom + ORIGIN - 10, 20, 20);
 		} else if (this.name.toLowerCase() === PLUTO) {
-			image(plutoImg, this.px * NORMALISE_DISTANCES * zoom  + ORIGIN - 5,
-				this.py * NORMALISE_DISTANCES * zoom + ORIGIN - 5, 10, 10);
+			image(plutoImg, this.px * NORMALISE_DISTANCES * zoom  + ORIGIN - 10,
+				this.py * NORMALISE_DISTANCES * zoom + ORIGIN - 10, 20, 20);
 		} else {
 			ellipse(this.px * NORMALISE_DISTANCES * zoom  + ORIGIN,
 				this.py * NORMALISE_DISTANCES * zoom + ORIGIN, 5, 5);

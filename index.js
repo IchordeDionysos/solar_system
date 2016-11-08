@@ -17,15 +17,15 @@ function preload() {
 	 https://upload.wikimedia.org/wikipedia/commons/a/a7/Pluto-01_Stern_03_Pluto_Color_TXT.jpg
 	 */
 	sunImg = loadGif('images/sun.gif');
-	mercuryImg = loadImage('images/mercury.jpg');
-	venusImg = loadImage('images/venus.jpg');
-	earthImg = loadImage('images/earth.jpg');
-	marsImg = loadImage('images/mars.jpg');
-	jupiterImg = loadImage('images/jupiter.jpg');
-	saturnImg = loadImage('images/saturn.jpg');
-	uranusImg = loadImage('images/uranus.jpg');
-	neptuneImg = loadImage('images/neptune.jpg');
-	plutoImg = loadImage('images/pluto.jpg');
+	mercuryImg = loadImage('images/mercury.png');
+	venusImg = loadImage('images/venus.png');
+	earthImg = loadImage('images/earth.png');
+	marsImg = loadImage('images/mars.png');
+	jupiterImg = loadImage('images/jupiter.png');
+	saturnImg = loadImage('images/saturn.png');
+	uranusImg = loadImage('images/uranus.png');
+	neptuneImg = loadImage('images/neptune.png');
+	plutoImg = loadImage('images/pluto.png');
 }
 
 // The statements in the setup() function
@@ -74,7 +74,7 @@ function draw() {
 		// fill(249, 216, 44);
 		// stroke(249, 216, 44);
 		// ellipse(ORIGIN, ORIGIN, 10, 10);
-		image(sunImg, ORIGIN - 10, ORIGIN - 10, 20, 20);
+		image(sunImg, ORIGIN - 10, ORIGIN - 10, 30, 30);
 		for (var d=0; d<planets.length; d++) {
 			planets[d].draw(zoom);
 		}
